@@ -8,6 +8,14 @@ public struct Identifier<E: Entity>: Equatable, Hashable {
     }
 }
 
+extension Identifier {
+    internal func url(baseURL: URL) -> URL {
+        return baseURL
+            .appendingPathComponent(self.rawValue)
+            .appendingPathExtension("json")
+    }
+}
+
 public protocol Entity: Codable {
     var identifier: Identifier<Self> { get }
 }

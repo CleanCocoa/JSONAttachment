@@ -11,7 +11,7 @@ public final class EntityWriter<E: Entity> {
 
     public func write(entity: E) throws {
         let data = try encoder.encode(entity)
-        let url = baseURL.appendingPathComponent(entity.identifier.rawValue)
+        let url = entity.identifier.url(baseURL: baseURL)
         try data.write(to: url, options: .atomicWrite)
     }
 }

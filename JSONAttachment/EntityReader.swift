@@ -10,7 +10,7 @@ public final class EntityReader<E: Entity> {
     lazy var decoder = JSONDecoder()
 
     public func entity(identifier: Identifier<E>) throws -> E? {
-        let url = baseURL.appendingPathComponent(identifier.rawValue)
+        let url = identifier.url(baseURL: baseURL)
         let data = try Data(contentsOf: url)
         return try decoder.decode(E.self, from: data)
     }
