@@ -13,6 +13,10 @@
 		50B67CDA23FFD8CF004910B0 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CD923FFD8CF004910B0 /* Entity.swift */; };
 		50B67CDC23FFD9D3004910B0 /* EntityWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CDB23FFD9D3004910B0 /* EntityWriter.swift */; };
 		50B67CDE23FFDB6E004910B0 /* EntityReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CDD23FFDB6E004910B0 /* EntityReader.swift */; };
+		50B67CE023FFDD4B004910B0 /* FileExistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CDF23FFDD4B004910B0 /* FileExistence.swift */; };
+		50B67CE223FFDD7C004910B0 /* FileManager+FileExistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CE123FFDD7C004910B0 /* FileManager+FileExistence.swift */; };
+		50B67CE423FFDE94004910B0 /* JSONLister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CE323FFDE94004910B0 /* JSONLister.swift */; };
+		50B67CE623FFDEBC004910B0 /* FileManager+JSONLister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CE523FFDEBC004910B0 /* FileManager+JSONLister.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,10 @@
 		50B67CD923FFD8CF004910B0 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		50B67CDB23FFD9D3004910B0 /* EntityWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityWriter.swift; sourceTree = "<group>"; };
 		50B67CDD23FFDB6E004910B0 /* EntityReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityReader.swift; sourceTree = "<group>"; };
+		50B67CDF23FFDD4B004910B0 /* FileExistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExistence.swift; sourceTree = "<group>"; };
+		50B67CE123FFDD7C004910B0 /* FileManager+FileExistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+FileExistence.swift"; sourceTree = "<group>"; };
+		50B67CE323FFDE94004910B0 /* JSONLister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLister.swift; sourceTree = "<group>"; };
+		50B67CE523FFDEBC004910B0 /* FileManager+JSONLister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+JSONLister.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +89,10 @@
 				50B67CD923FFD8CF004910B0 /* Entity.swift */,
 				50B67CDD23FFDB6E004910B0 /* EntityReader.swift */,
 				50B67CDB23FFD9D3004910B0 /* EntityWriter.swift */,
+				50B67CDF23FFDD4B004910B0 /* FileExistence.swift */,
+				50B67CE323FFDE94004910B0 /* JSONLister.swift */,
+				50B67CE523FFDEBC004910B0 /* FileManager+JSONLister.swift */,
+				50B67CE123FFDD7C004910B0 /* FileManager+FileExistence.swift */,
 				50B67CC323FFD1A9004910B0 /* Info.plist */,
 			);
 			path = JSONAttachment;
@@ -207,6 +219,10 @@
 			files = (
 				50B67CDA23FFD8CF004910B0 /* Entity.swift in Sources */,
 				50B67CDC23FFD9D3004910B0 /* EntityWriter.swift in Sources */,
+				50B67CE423FFDE94004910B0 /* JSONLister.swift in Sources */,
+				50B67CE623FFDEBC004910B0 /* FileManager+JSONLister.swift in Sources */,
+				50B67CE223FFDD7C004910B0 /* FileManager+FileExistence.swift in Sources */,
+				50B67CE023FFDD4B004910B0 /* FileExistence.swift in Sources */,
 				50B67CDE23FFDB6E004910B0 /* EntityReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
