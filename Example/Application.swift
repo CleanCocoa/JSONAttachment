@@ -1,7 +1,7 @@
 //  Copyright © 2020 Christian Tietze. All rights reserved. Distributed under the MIT License.
 
 import JSONAttachment
-import class AppKit.NSImage
+import AppKit
 
 struct Icon {
     let image: NSImage
@@ -68,7 +68,11 @@ extension Icon: RestorableAttachment {
     }
 
     func write(to url: URL) throws {
-        guard let data = image.tiffRepresentation else { return }
-        try data.write(to: url)
+        guard let pngData = image.tiffRepresentation
+            .flatMap(NSBitmapImageRep.init(data:))
+            .flatMap({ $0.representation(using: .png, properties: [:]) })
+            else { return }
+
+        try pngData.write(to: url)
     }
 }
