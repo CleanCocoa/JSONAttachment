@@ -8,10 +8,13 @@ public enum EntityReadingError: Error {
 }
 
 public final class EntityReader<E: Entity> {
-    public let directory: URL
+    public typealias Identifier = JSONAttachment.Identifier<E>
+    public typealias Attachment = E.Attachment
 
-    public init(directory: URL) {
-        self.directory = directory
+    public let directoryURL: URL
+
+    public init(directoryURL: URL) {
+        self.directoryURL = directoryURL
     }
 
     // Testing seams:
@@ -20,9 +23,16 @@ public final class EntityReader<E: Entity> {
     lazy var jsonLister: JSONLister = FileManager.default
 
     /// - Throws: `EntityReadingError`
-    public func entity(identifier: Identifier<E>) throws -> E? {
-        let url = identifier.url(baseURL: directory)
-        return try entity(fromURL: url)
+    public func entity(identifier: Identifier) throws -> E? {
+        let url = identifier.jsonURL(baseURL: directoryURL)
+        let restoredEntity = try entity(fromURL: url)
+        return restoringAttachment(entity: restoredEntity)
+    }
+
+    private func restoringAttachment(entity: E) -> E {
+        let attachmentURL = entity.identifier.attachmentURL(baseURL: directoryURL)
+        return Attachment(contentsOf: attachmentURL).map(entity.restoringAttachment(_:))
+            ?? entity
     }
 
     /// - Throws: `EntityReadingError` to wrap file access errors and decoding errors.
@@ -53,7 +63,8 @@ public final class EntityReader<E: Entity> {
     /// - Returns: A list of entities that were found in the receiver's `baseURL`.
     public func all() throws -> [E] {
         return try jsonLister
-            .jsonFileURLsInDirectory(url: directory)
+            .jsonFileURLsInDirectory(url: directoryURL)
             .map(entity(fromURL:))
+            .map(restoringAttachment(entity:))
     }
 }

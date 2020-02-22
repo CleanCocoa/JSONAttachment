@@ -23,6 +23,7 @@
 		50B67CF524003572004910B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B67CF324003572004910B0 /* Main.storyboard */; };
 		50B67CFC240043E4004910B0 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CFB240043E4004910B0 /* Application.swift */; };
 		50B67CFE24011074004910B0 /* URLAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CFD24011074004910B0 /* URLAccess.swift */; };
+		50B67D0224013418004910B0 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67D0124013418004910B0 /* Identifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		50B67CF724003572004910B0 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		50B67CFB240043E4004910B0 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		50B67CFD24011074004910B0 /* URLAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAccess.swift; sourceTree = "<group>"; };
+		50B67D0124013418004910B0 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				50B67CC223FFD1A9004910B0 /* JSONAttachment.h */,
 				50B67CD923FFD8CF004910B0 /* Entity.swift */,
+				50B67D0124013418004910B0 /* Identifier.swift */,
 				50B67CDD23FFDB6E004910B0 /* EntityReader.swift */,
 				50B67CDB23FFD9D3004910B0 /* EntityWriter.swift */,
 				50B67CDF23FFDD4B004910B0 /* FileExistence.swift */,
@@ -300,6 +303,7 @@
 				50B67CE623FFDEBC004910B0 /* FileManager+JSONLister.swift in Sources */,
 				50B67CE223FFDD7C004910B0 /* FileManager+FileExistence.swift in Sources */,
 				50B67CE023FFDD4B004910B0 /* FileExistence.swift in Sources */,
+				50B67D0224013418004910B0 /* Identifier.swift in Sources */,
 				50B67CDE23FFDB6E004910B0 /* EntityReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

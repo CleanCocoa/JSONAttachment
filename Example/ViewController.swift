@@ -10,9 +10,11 @@ extension Application {
             else { return nil }
         let name = bundle.infoDictionary?["CFBundleName"] as? String
             ?? FileManager.default.displayName(atPath: url.path)
+        let icon = Icon(image: NSWorkspace.shared.icon(forFile: url.path))
         self.init(
             bundleIdentifier: bundleIdentifier,
-            name: name)
+            name: name,
+            icon: icon)
     }
 }
 
@@ -55,7 +57,7 @@ class ViewController: NSViewController {
         log("Launch")
 
         if let directoryURL = directoryURL {
-            let applications: [Application] = (try? EntityReader(directory: directoryURL).all()) ?? []
+            let applications: [Application] = (try? EntityReader(directoryURL: directoryURL).all()) ?? []
             log("Restored repo URL: \(directoryURL)\n"
                 + applications.map { "- \($0)" }.joined(separator: "\n"))
             displayDirectoryURL(directoryURL)
