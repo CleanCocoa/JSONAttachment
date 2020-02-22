@@ -19,6 +19,7 @@ extension Application {
 }
 
 class ViewController: NSViewController {
+    typealias EntityRepository = JSONAttachment.EntityRepository<Application>
 
     @IBOutlet weak var directoryURLLabel: NSTextField!
     @IBOutlet weak var addAppButton: NSButton!
@@ -57,7 +58,8 @@ class ViewController: NSViewController {
         log("Launch")
 
         if let directoryURL = directoryURL {
-            let applications: [Application] = (try? EntityReader(directoryURL: directoryURL).all()) ?? []
+            let repository = EntityRepository(directoryURL: directoryURL)
+            let applications: [Application] = (try? repository.all()) ?? []
             log("Restored repo URL: \(directoryURL)\n"
                 + applications.map { "- \($0)" }.joined(separator: "\n"))
             displayDirectoryURL(directoryURL)
@@ -94,13 +96,14 @@ class ViewController: NSViewController {
 
         guard .OK == panel.runModal() else { return }
 
+        let repository = EntityRepository(directoryURL: directoryURL)
         let applications = panel.urls.compactMap(Application.init(url:))
 
         log("Adding applications:")
 
         for application in applications {
             do {
-                try EntityWriter(directoryURL: directoryURL).write(entity: application)
+                try repository.add(entity: application)
                 log("- \(application)")
             } catch {
                 log("- Error writing \(application): \(error)")
@@ -110,15 +113,14 @@ class ViewController: NSViewController {
 
     @IBAction func removeAll(_ sender: Any) {
         guard let directoryURL = directoryURL else { return }
-        guard let identifiers: [Identifier<Application>] = try? EntityReader(directoryURL: directoryURL).allIdentifiers() else { return }
-
-        let remover = EntityRemover<Application>(directoryURL: directoryURL)
+        let repository = EntityRepository(directoryURL: directoryURL)
+        guard let identifiers: [Identifier<Application>] = try? repository.allIdentifiers() else { return }
 
         log("Removing applications:")
 
         for identifier in identifiers {
             do {
-                try remover.removeEntity(identifier: identifier)
+                try repository.remove(identifier: identifier)
                 log("- \(identifier)")
             } catch {
                 log("- Error removing \(identifier): \(error)")
