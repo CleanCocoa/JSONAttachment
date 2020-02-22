@@ -80,7 +80,14 @@ class ViewController: NSViewController {
         guard .OK == panel.runModal() else { return }
 
         let applications = panel.urls.compactMap(Application.init(url:))
-        log("Picked: \(applications)")
+
+        for application in applications {
+            do {
+                try EntityWriter(directoryURL: directoryURL).write(entity: application)
+            } catch {
+                log("Error writing \(application): \(error)")
+            }
+        }
     }
 
     @IBAction func removeAll(_ sender: Any) {
