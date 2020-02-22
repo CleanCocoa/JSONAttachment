@@ -62,7 +62,7 @@ extension Application: Entity {
 }
 
 extension Icon: RestorableAttachment {
-    private static let size = NSSize(width: 64, height: 64)
+    private static let size = NSSize(width: 32, height: 32)
 
     init?(contentsOf url: URL) {
         guard let image = NSImage(contentsOf: url) else { return nil }
@@ -70,17 +70,70 @@ extension Icon: RestorableAttachment {
     }
 
     func write(to url: URL) throws {
-        guard let representation = image
+        let iconRepresentations = self.iconRepresentations(size: Icon.size)
+
+        guard !iconRepresentations.isEmpty else { return }
+        guard let destination = CGImageDestinationCreateWithURL(url as NSURL, kUTTypeAppleICNS, iconRepresentations.count, nil) else { return }
+
+        for representation in iconRepresentations {
+            guard let cgImage = representation.cgImage(forProposedRect: nil, context: nil, hints: nil) else { continue }
+            let dpiFactor = representation.dpiFactor
+            let hints: [CFString : Any] = [
+                kCGImagePropertyDPIWidth : dpiFactor.dpi as NSNumber,
+                kCGImagePropertyDPIHeight : dpiFactor.dpi  as NSNumber,
+                kCGImagePropertyPixelWidth : representation.pixelsWide as NSNumber,
+                kCGImagePropertyPixelHeight : representation.pixelsHigh as NSNumber
+            ]
+            CGImageDestinationAddImage(destination, cgImage, hints as NSDictionary)
+        }
+
+        let success = CGImageDestinationFinalize(destination)
+        assert(success)
+    }
+
+    private func iconRepresentations(size: NSSize) -> [NSImageRep] {
+        let representations = self.image.representations.filter { $0.size == size }
+
+        if !representations.isEmpty {
+            return representations
+        }
+
+        guard let fallbackRepresentation = self.image
             .bestRepresentation(for: NSRect(origin: .zero, size: Icon.size),
                                 context: nil,
                                 hints: [.interpolation : NSImageInterpolation.high])
             // Attempt fallback to generic TIFF representation e.g. for vectors
             ?? image.tiffRepresentation.flatMap(NSBitmapImageRep.init(data:))
-            else { return }
+            else { return [] }
+        return [fallbackRepresentation]
+    }
+}
 
-        guard let destination = CGImageDestinationCreateWithURL(url as NSURL, kUTTypePNG, 1, nil) else { return }
-        guard let cgImage = representation.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return }
-        CGImageDestinationAddImage(destination, cgImage, nil)
-        CGImageDestinationFinalize(destination)
+extension NSImageRep {
+    fileprivate enum DPIFactor {
+        case at1x, at2x, at3x
+
+        var dpi: Int {
+            switch self {
+            case .at1x: return (1 * 72)
+            case .at2x: return (2 * 72)
+            case .at3x: return (3 * 72)
+            }
+        }
+    }
+
+    fileprivate var dpiFactor: DPIFactor {
+        let sizeWidth = Int(size.width)
+        let sizeHeight = Int(size.height)
+
+        if pixelsWide == sizeWidth * 3 && pixelsHigh == sizeHeight * 3 {
+            return .at3x
+        }
+
+        if pixelsWide == sizeWidth * 2 && pixelsHigh == sizeHeight * 2 {
+            return .at2x
+        }
+
+        return .at1x
     }
 }
