@@ -62,17 +62,25 @@ extension Application: Entity {
 }
 
 extension Icon: RestorableAttachment {
+    private static let size = NSSize(width: 64, height: 64)
+
     init?(contentsOf url: URL) {
         guard let image = NSImage(contentsOf: url) else { return nil }
         self.init(image: image)
     }
 
     func write(to url: URL) throws {
-        guard let pngData = image.tiffRepresentation
-            .flatMap(NSBitmapImageRep.init(data:))
-            .flatMap({ $0.representation(using: .png, properties: [:]) })
+        guard let representation = image
+            .bestRepresentation(for: NSRect(origin: .zero, size: Icon.size),
+                                context: nil,
+                                hints: [.interpolation : NSImageInterpolation.high])
+            // Attempt fallback to generic TIFF representation e.g. for vectors
+            ?? image.tiffRepresentation.flatMap(NSBitmapImageRep.init(data:))
             else { return }
 
-        try pngData.write(to: url)
+        guard let destination = CGImageDestinationCreateWithURL(url as NSURL, kUTTypePNG, 1, nil) else { return }
+        guard let cgImage = representation.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return }
+        CGImageDestinationAddImage(destination, cgImage, nil)
+        CGImageDestinationFinalize(destination)
     }
 }
