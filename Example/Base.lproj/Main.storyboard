@@ -739,11 +739,6 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="pickApps:" target="XfG-lQ-9wD" id="qhf-eV-6o6"/>
-                                    <binding destination="AXY-bY-pm1" name="enabled" keyPath="values.directoryURL" id="Srg-DZ-K02">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSIsNotNil</string>
-                                        </dictionary>
-                                    </binding>
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rZT-3v-gTH">
@@ -762,11 +757,6 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="removeAll:" target="XfG-lQ-9wD" id="alP-mU-ore"/>
-                                    <binding destination="AXY-bY-pm1" name="enabled" keyPath="values.directoryURL" id="hhu-Qh-PjD">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSIsNotNil</string>
-                                        </dictionary>
-                                    </binding>
                                 </connections>
                             </button>
                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atO-iR-dYk">
@@ -841,7 +831,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addAppButton" destination="PfV-4x-1Rc" id="wuR-AN-z77"/>
                         <outlet property="directoryURLLabel" destination="rZT-3v-gTH" id="eEm-l7-akY"/>
+                        <outlet property="removeAllButton" destination="XQJ-LU-QBr" id="gUd-KA-IIG"/>
                         <outlet property="textView" destination="bSP-54-VXG" id="wLk-AD-ud0"/>
                     </connections>
                 </viewController>

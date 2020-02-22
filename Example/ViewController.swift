@@ -19,6 +19,8 @@ extension Application {
 class ViewController: NSViewController {
 
     @IBOutlet weak var directoryURLLabel: NSTextField!
+    @IBOutlet weak var addAppButton: NSButton!
+    @IBOutlet weak var removeAllButton: NSButton!
     @IBOutlet var textView: NSTextView!
 
     fileprivate let urlAccess = URLAccess(defaultsKey: "directoryURL")
@@ -33,11 +35,18 @@ class ViewController: NSViewController {
     }
 
     private func displayDirectoryURL(_ url: URL?) {
+        let buttonsAreEnabled: Bool
+
         if let url = url {
             directoryURLLabel.stringValue = String(describing: url.path)
+            buttonsAreEnabled = true
         } else {
             directoryURLLabel.stringValue = ""
+            buttonsAreEnabled = false
         }
+
+        addAppButton.isEnabled = buttonsAreEnabled
+        removeAllButton.isEnabled = buttonsAreEnabled
     }
 
     override func viewDidLoad() {
@@ -46,8 +55,12 @@ class ViewController: NSViewController {
         log("Launch")
 
         if let directoryURL = directoryURL {
-            log("Restored repo URL: \(directoryURL)")
+            let applications: [Application] = (try? EntityReader(directory: directoryURL).all()) ?? []
+            log("Restored repo URL: \(directoryURL)\n"
+                + applications.map { "- \($0)" }.joined(separator: "\n"))
             displayDirectoryURL(directoryURL)
+        } else {
+            displayDirectoryURL(nil)
         }
     }
 
@@ -81,11 +94,14 @@ class ViewController: NSViewController {
 
         let applications = panel.urls.compactMap(Application.init(url:))
 
+        log("Adding applications:")
+
         for application in applications {
             do {
                 try EntityWriter(directoryURL: directoryURL).write(entity: application)
+                log("- \(application)")
             } catch {
-                log("Error writing \(application): \(error)")
+                log("- Error writing \(application): \(error)")
             }
         }
     }
