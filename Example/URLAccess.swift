@@ -68,7 +68,7 @@ final class URLAccess {
             print("URL is stale: \(url)")
             return nil
         case .error(let error):
-            assertionFailure("Error accessing URL bookmark: \(error)")
+            print("Error accessing URL bookmark: \(error)")
             return nil
         }
     }
