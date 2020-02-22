@@ -753,9 +753,6 @@
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="AXY-bY-pm1" name="value" keyPath="values.directoryURL" id="z4k-N9-H8N"/>
-                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XQJ-LU-QBr">
                                 <rect key="frame" x="194" y="130" width="187" height="32"/>
@@ -844,6 +841,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="directoryURLLabel" destination="rZT-3v-gTH" id="eEm-l7-akY"/>
                         <outlet property="textView" destination="bSP-54-VXG" id="wLk-AD-ud0"/>
                     </connections>
                 </viewController>
