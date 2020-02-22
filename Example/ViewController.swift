@@ -18,6 +18,13 @@ extension Application {
     }
 }
 
+extension Result {
+    var value: Success? {
+        guard case .success(let value) = self else { return nil }
+        return value
+    }
+}
+
 class ViewController: NSViewController {
     typealias EntityRepository = JSONAttachment.EntityRepository<Application>
 
@@ -59,7 +66,7 @@ class ViewController: NSViewController {
 
         if let directoryURL = directoryURL {
             let repository = EntityRepository(directoryURL: directoryURL)
-            let applications: [Application] = (try? repository.all()) ?? []
+            let applications = repository.all().value ?? []
             log("Restored repo URL: \(directoryURL)\n"
                 + applications.map { "- \($0)" }.joined(separator: "\n"))
             displayDirectoryURL(directoryURL)
@@ -114,7 +121,7 @@ class ViewController: NSViewController {
     @IBAction func removeAll(_ sender: Any) {
         guard let directoryURL = directoryURL else { return }
         let repository = EntityRepository(directoryURL: directoryURL)
-        guard let identifiers: [Identifier<Application>] = try? repository.allIdentifiers() else { return }
+        guard case .success(let identifiers) = repository.allIdentifiers() else { return }
 
         log("Removing applications:")
 

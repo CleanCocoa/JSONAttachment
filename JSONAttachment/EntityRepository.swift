@@ -16,16 +16,16 @@ public final class EntityRepository<Entity: JSONAttachment.Entity> {
         self.remover = EntityRemover(directoryURL: directoryURL)
     }
 
-    public func all() throws -> [Entity] {
-        return try reader.all()
+    public func all() -> Result<[Entity], EntityReadingError> {
+        return reader.all()
     }
 
-    public func allIdentifiers() throws -> [Identifier] {
-        return try reader.allIdentifiers()
+    public func allIdentifiers() -> Result<[Identifier], EntityReadingError> {
+        return reader.allIdentifiers()
     }
 
-    public func entity(identifier: Identifier) throws -> Entity? {
-        return try reader.entity(identifier: identifier)
+    public func entity(identifier: Identifier) -> Result<Entity?, EntityReadingError> {
+        return reader.entity(identifier: identifier)
     }
 
     public func add(entity: Entity) throws {
