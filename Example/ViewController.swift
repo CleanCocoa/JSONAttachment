@@ -32,6 +32,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var addAppButton: NSButton!
     @IBOutlet weak var removeAllButton: NSButton!
     @IBOutlet var textView: NSTextView!
+    @IBOutlet var tableView: NSTableView!
 
     fileprivate let urlAccess = URLAccess(defaultsKey: "directoryURL")
     fileprivate var directoryURL: URL? {
@@ -41,6 +42,7 @@ class ViewController: NSViewController {
             log(urlAccess.url.map { "Changed repo URL: \($0)" }
                 ?? "Removed repo URL")
             displayDirectoryURL(urlAccess.url)
+            tableView.reloadData()
         }
     }
 
@@ -116,6 +118,8 @@ class ViewController: NSViewController {
                 log("- Error writing \(application): \(error)")
             }
         }
+
+        tableView.reloadData()
     }
 
     @IBAction func removeAll(_ sender: Any) {
@@ -133,5 +137,30 @@ class ViewController: NSViewController {
                 log("- Error removing \(identifier): \(error)")
             }
         }
+
+        tableView.reloadData()
+    }
+}
+
+extension ViewController: NSTableViewDelegate, NSTableViewDataSource {
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        guard let directoryURL = directoryURL else { return nil }
+        let repository = EntityRepository(directoryURL: directoryURL)
+        guard case .success(let entities) = repository.all() else { return nil }
+        return entities[row]
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let entity = self.tableView(tableView, objectValueFor: tableColumn, row: row) as? Application else { return nil }
+
+        let cell = tableView.makeView(withIdentifier: ApplicationCellView.identifier, owner: self) as? ApplicationCellView
+        cell?.configure(application: entity)
+        return cell
+    }
+
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        guard let directoryURL = directoryURL else { return 0 }
+        let repository = EntityRepository(directoryURL: directoryURL)
+        return repository.count.value ?? 0
     }
 }

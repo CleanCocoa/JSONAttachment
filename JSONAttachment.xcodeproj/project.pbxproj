@@ -28,6 +28,7 @@
 		50B67D0624013D67004910B0 /* FileRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67D0524013D67004910B0 /* FileRemover.swift */; };
 		50B67D0824013D80004910B0 /* FileManager+FileRemover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67D0724013D80004910B0 /* FileManager+FileRemover.swift */; };
 		50B67D0A24013EFD004910B0 /* EntityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67D0924013EFD004910B0 /* EntityRepository.swift */; };
+		50B67D0E24019B04004910B0 /* ApplicationCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67D0D24019B04004910B0 /* ApplicationCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		50B67D0524013D67004910B0 /* FileRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRemover.swift; sourceTree = "<group>"; };
 		50B67D0724013D80004910B0 /* FileManager+FileRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+FileRemover.swift"; sourceTree = "<group>"; };
 		50B67D0924013EFD004910B0 /* EntityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityRepository.swift; sourceTree = "<group>"; };
+		50B67D0D24019B04004910B0 /* ApplicationCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			children = (
 				50B67CED24003570004910B0 /* AppDelegate.swift */,
 				50B67CEF24003570004910B0 /* ViewController.swift */,
+				50B67D0D24019B04004910B0 /* ApplicationCellView.swift */,
 				50B67CFB240043E4004910B0 /* Application.swift */,
 				50B67CFD24011074004910B0 /* URLAccess.swift */,
 				50B67CF124003572004910B0 /* Assets.xcassets */,
@@ -340,6 +343,7 @@
 				50B67CF024003570004910B0 /* ViewController.swift in Sources */,
 				50B67CEE24003570004910B0 /* AppDelegate.swift in Sources */,
 				50B67CFE24011074004910B0 /* URLAccess.swift in Sources */,
+				50B67D0E24019B04004910B0 /* ApplicationCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
