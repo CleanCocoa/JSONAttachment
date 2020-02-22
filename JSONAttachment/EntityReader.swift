@@ -18,6 +18,11 @@ public final class EntityReader<E: Entity> {
         self.directoryURL = directoryURL
     }
 
+    /// Number of recognizable items in `directoryURL`, based on whether it is recognized as an `Identifier`/JSON file.
+    public var count: Result<Int, EntityReadingError> {
+        return allIdentifiers().map { $0.count }
+    }
+
     // Testing seams:
     lazy var decoder = JSONDecoder()
     lazy var fileExistenceChecker: FileExistenceChecker = FileManager.default

@@ -35,4 +35,9 @@ public final class EntityRepository<Entity: JSONAttachment.Entity> {
     public func remove(identifier: Identifier) throws {
         try remover.removeEntity(identifier: identifier)
     }
+
+    /// Number of recognizable items in `directoryURL`, based on whether it is recognized as an `Identifier`/JSON file.
+    public var count: Result<Int, EntityReadingError> {
+        return reader.count
+    }
 }
