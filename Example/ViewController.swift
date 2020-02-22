@@ -109,5 +109,20 @@ class ViewController: NSViewController {
     }
 
     @IBAction func removeAll(_ sender: Any) {
+        guard let directoryURL = directoryURL else { return }
+        guard let identifiers: [Identifier<Application>] = try? EntityReader(directoryURL: directoryURL).allIdentifiers() else { return }
+
+        let remover = EntityRemover<Application>(directoryURL: directoryURL)
+
+        log("Removing applications:")
+
+        for identifier in identifiers {
+            do {
+                try remover.removeEntity(identifier: identifier)
+                log("- \(identifier)")
+            } catch {
+                log("- Error removing \(identifier): \(error)")
+            }
+        }
     }
 }

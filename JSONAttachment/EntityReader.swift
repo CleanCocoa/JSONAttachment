@@ -59,12 +59,19 @@ public final class EntityReader<E: Entity> {
         }
     }
 
-    /// - Throws: `EntityReadingError`
+    /// - Throws: `EntityReadingError` or directory listing error.
     /// - Returns: A list of entities that were found in the receiver's `baseURL`.
     public func all() throws -> [E] {
         return try jsonLister
             .jsonFileURLsInDirectory(url: directoryURL)
             .map(entity(fromURL:))
             .map(restoringAttachment(entity:))
+    }
+
+    /// - Throws: `EntityReadingError` or directory listing error.
+    public func allIdentifiers() throws -> [Identifier] {
+        return try jsonLister
+            .jsonFileURLsInDirectory(url: directoryURL)
+            .compactMap(Identifier.init(url:))
     }
 }
