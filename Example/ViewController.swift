@@ -21,40 +21,14 @@ class ViewController: NSViewController {
     @IBOutlet weak var directoryURLLabel: NSTextField!
     @IBOutlet var textView: NSTextView!
 
+    fileprivate let urlAccess = URLAccess(defaultsKey: "directoryURL")
     fileprivate var directoryURL: URL? {
-        get {
-            guard let bookmark = UserDefaults.standard.data(forKey: "directoryURL") else { return nil }
-            do {
-                var isStale = false
-                let url = try URL(resolvingBookmarkData: bookmark, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &isStale)
-                guard !isStale else {
-                    UserDefaults.standard.removeObject(forKey: "directoryURL")
-                    log("Repo URL is stale and was removed: \(url)")
-                    return nil
-                }
-                return url
-            } catch {
-                UserDefaults.standard.removeObject(forKey: "directoryURL")
-                log("Repo URL bookmark couldn't be resolved and was removed")
-                return nil
-            }
-        }
+        get { return urlAccess.url }
         set {
-            if let newValue = newValue {
-                do {
-                    let bookmark = try newValue.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
-                    UserDefaults.standard.set(bookmark, forKey: "directoryURL")
-                    log("Changed repo to: \(newValue)")
-                    displayDirectoryURL(newValue)
-                } catch {
-                    log("Could not create security-scoped URL bookmark for \(newValue) :(")
-                    displayDirectoryURL(nil)
-                }
-            } else {
-                UserDefaults.standard.removeObject(forKey: "directoryURL")
-                log("Removed the repo")
-                displayDirectoryURL(nil)
-            }
+            urlAccess.url = newValue
+            log(urlAccess.url.map { "Changed repo URL: \($0)" }
+                ?? "Removed repo URL")
+            displayDirectoryURL(urlAccess.url)
         }
     }
 

@@ -22,6 +22,7 @@
 		50B67CF224003572004910B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50B67CF124003572004910B0 /* Assets.xcassets */; };
 		50B67CF524003572004910B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50B67CF324003572004910B0 /* Main.storyboard */; };
 		50B67CFC240043E4004910B0 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CFB240043E4004910B0 /* Application.swift */; };
+		50B67CFE24011074004910B0 /* URLAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B67CFD24011074004910B0 /* URLAccess.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		50B67CF624003572004910B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B67CF724003572004910B0 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		50B67CFB240043E4004910B0 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		50B67CFD24011074004910B0 /* URLAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAccess.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				50B67CED24003570004910B0 /* AppDelegate.swift */,
 				50B67CEF24003570004910B0 /* ViewController.swift */,
 				50B67CFB240043E4004910B0 /* Application.swift */,
+				50B67CFD24011074004910B0 /* URLAccess.swift */,
 				50B67CF124003572004910B0 /* Assets.xcassets */,
 				50B67CF324003572004910B0 /* Main.storyboard */,
 				50B67CF624003572004910B0 /* Info.plist */,
@@ -308,6 +311,7 @@
 				50B67CFC240043E4004910B0 /* Application.swift in Sources */,
 				50B67CF024003570004910B0 /* ViewController.swift in Sources */,
 				50B67CEE24003570004910B0 /* AppDelegate.swift in Sources */,
+				50B67CFE24011074004910B0 /* URLAccess.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
