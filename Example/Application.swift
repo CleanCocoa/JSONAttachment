@@ -71,9 +71,10 @@ extension Icon: RestorableAttachment {
 
     func write(to url: URL) throws {
         let iconRepresentations = self.iconRepresentations(size: Icon.size)
-
         guard !iconRepresentations.isEmpty else { return }
-        guard let destination = CGImageDestinationCreateWithURL(url as NSURL, kUTTypeAppleICNS, iconRepresentations.count, nil) else { return }
+
+        let data = NSMutableData()
+        guard let destination = CGImageDestinationCreateWithData(data, kUTTypeAppleICNS, iconRepresentations.count, nil) else { return }
 
         for representation in iconRepresentations {
             guard let cgImage = representation.cgImage(forProposedRect: nil, context: nil, hints: nil) else { continue }
@@ -87,8 +88,8 @@ extension Icon: RestorableAttachment {
             CGImageDestinationAddImage(destination, cgImage, hints as NSDictionary)
         }
 
-        let success = CGImageDestinationFinalize(destination)
-        assert(success)
+        guard CGImageDestinationFinalize(destination) else { return }
+        data.write(to: url, atomically: true)
     }
 
     private func iconRepresentations(size: NSSize) -> [NSImageRep] {
@@ -109,18 +110,19 @@ extension Icon: RestorableAttachment {
     }
 }
 
-extension NSImageRep {
-    fileprivate enum DPIFactor {
-        case at1x, at2x, at3x
+fileprivate enum DPIFactor: Hashable {
+    case at1x, at2x, at3x
 
-        var dpi: Int {
-            switch self {
-            case .at1x: return (1 * 72)
-            case .at2x: return (2 * 72)
-            case .at3x: return (3 * 72)
-            }
+    var dpi: Int {
+        switch self {
+        case .at1x: return (1 * 72)
+        case .at2x: return (2 * 72)
+        case .at3x: return (3 * 72)
         }
     }
+}
+
+extension NSImageRep {
 
     fileprivate var dpiFactor: DPIFactor {
         let sizeWidth = Int(size.width)
