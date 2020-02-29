@@ -65,7 +65,8 @@ extension Icon: RestorableAttachment {
     private static let size = NSSize(width: 32, height: 32)
 
     init?(contentsOf url: URL) {
-        guard let image = NSImage(contentsOf: url) else { return nil }
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        guard let image = NSImage(data: data) else { return nil }
         self.init(image: image)
     }
 
