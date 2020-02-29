@@ -17,6 +17,24 @@ JSONAttachment takes care of storing and retrieving your stored objects plus the
 
 See the Example project for an app that copies 32x32 pixel icons from app bundles as "attachment".
 
+    +---------------------+                               
+    |    Your Entity      |            +--------------+   
+    |                     |    add to  |              |   
+    | - name: String      ------------>|  Repository  |   
+    | - date: Date        |            |              |   
+    | - attachment: Image |            +------|-------+   
+    |                     |                   |           
+    +---------------------+             +-----+-----+     
+                                        |   write   |     
+                                        |           |    
+                                        v           v     
+                                   +--------,    +--------, 
+                                   | .json |_\   |  .png |_\
+                                   |         |   |         |
+                                   | {name:, |   |         |
+                                   |  date:} |   |         |
+                                   +---------+   +---------+
+
 ### Define your `Entity`
 
 Make your objects conform to `Entity` and
