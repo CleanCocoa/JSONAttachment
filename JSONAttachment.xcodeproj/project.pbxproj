@@ -49,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		503637EE240A83B500367BA5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		503637EF240A83B500367BA5 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		50B67CBF23FFD1A9004910B0 /* JSONAttachment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONAttachment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B67CC223FFD1A9004910B0 /* JSONAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONAttachment.h; sourceTree = "<group>"; };
 		50B67CC323FFD1A9004910B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,6 +110,8 @@
 		50B67CB523FFD1A9004910B0 = {
 			isa = PBXGroup;
 			children = (
+				503637EE240A83B500367BA5 /* README.md */,
+				503637EF240A83B500367BA5 /* LICENSE */,
 				50B67CC123FFD1A9004910B0 /* JSONAttachment */,
 				50B67CCC23FFD1A9004910B0 /* JSONAttachmentTests */,
 				50B67CEC24003570004910B0 /* Example */,
