@@ -28,12 +28,14 @@ public final class EntityRepository<Entity: JSONAttachment.Entity> {
         return reader.entity(identifier: identifier)
     }
 
-    public func add(entity: Entity) throws {
-        try writer.write(entity: entity)
+    public func add(_ entity: Entity) -> Result<Entity, EntityWritingError> {
+        return writer.write(entity: entity)
+            .map { _ in entity }
     }
 
-    public func remove(identifier: Identifier) throws {
-        try remover.removeEntity(identifier: identifier)
+    public func remove(identifier: Identifier) -> Result<Identifier, EntityRemovingError> {
+        return remover.removeEntity(identifier: identifier)
+            .map { _ in identifier }
     }
 
     /// Number of recognizable items in `directoryURL`, based on whether it is recognized as an `Identifier`/JSON file.

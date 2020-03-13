@@ -15,28 +15,47 @@ public final class EntityWriter<E: Entity> {
 
     lazy var encoder = JSONEncoder()
 
-    /// - Throws: `EntityWritingError`
-    public func write(entity: E) throws {
+    // MARK: - Result-based accessors
+
+    public func write(entity: E) -> Result<(), EntityWritingError> {
         let entityURL = entity.identifier.jsonURL(baseURL: directoryURL)
         let attachmentURL = entity.identifier.attachmentURL(baseURL: directoryURL)
 
-        let entityData: Data
-        do {
-            entityData = try encoder.encode(entity)
-        } catch {
-            throw EntityWritingError.encodingFailed(error)
-        }
+        return data(entity: entity)
+            .flatMap { write(data: $0, to: entityURL) }
+            .flatMap { write(attachment: entity.attachment, to: attachmentURL) }
+    }
 
+    private func data(entity: E) -> Result<Data, EntityWritingError> {
         do {
-            try entityData.write(to: entityURL, options: .atomicWrite)
+            let data = try encoder.encode(entity)
+            return .success(data)
         } catch {
-            throw EntityWritingError.writingEntityFailed(error)
+            return .failure(.encodingFailed(error))
         }
+    }
 
+    private func write(data: Data, to entityURL: URL) -> Result<Void, EntityWritingError> {
         do {
-            try entity.attachment?.write(to: attachmentURL)
+            try data.write(to: entityURL, options: .atomicWrite)
+            return .success(())
         } catch {
-            throw EntityWritingError.writingAttachmentFailed(error)
+            return .failure(.writingEntityFailed(error))
         }
+    }
+
+    private func write(attachment: E.Attachment?, to attachmentURL: URL) -> Result<Void, EntityWritingError> {
+        do {
+            try attachment?.write(to: attachmentURL)
+            return .success(())
+        } catch {
+            return .failure(.writingAttachmentFailed(error))
+        }
+    }
+
+    // MARK: - Throwing variants
+
+    public func write(entity: E) throws {
+        try write(entity: entity).get()
     }
 }

@@ -110,12 +110,12 @@ class ViewController: NSViewController {
 
         log("Adding applications:")
 
-        for application in applications {
-            do {
-                try repository.add(entity: application)
+        for result in applications.map(repository.add(_:)) {
+            switch result {
+            case .success(let application):
                 log("- \(application)")
-            } catch {
-                log("- Error writing \(application): \(error)")
+            case .failure(let error):
+                log("- Error writing: \(error)")
             }
         }
 
@@ -129,12 +129,12 @@ class ViewController: NSViewController {
 
         log("Removing applications:")
 
-        for identifier in identifiers {
-            do {
-                try repository.remove(identifier: identifier)
+        for result in identifiers.map(repository.remove(identifier:)) {
+            switch result {
+            case .success(let identifier):
                 log("- \(identifier)")
-            } catch {
-                log("- Error removing \(identifier): \(error)")
+            case .failure(let error):
+                log("- Error removing: \(error)")
             }
         }
 

@@ -16,27 +16,40 @@ public final class EntityRemover<E: Entity> {
     lazy var fileExistenceChecker: FileExistenceChecker = FileManager.default
     lazy var fileRemover: FileRemover = FileManager.default
 
-    /// - Throws: `EntityRemovingError`
-    public func removeEntity(identifier: Identifier<E>) throws {
-        try removeFileIfExists(url: identifier.jsonURL(baseURL: directoryURL))
-        try removeFileIfExists(url: identifier.attachmentURL(baseURL: directoryURL))
+    // MARK: - Result-based accessors
+
+    public func removeEntity(identifier: Identifier<E>) -> Result<Void, EntityRemovingError> {
+        // Try to carry out both side effects first
+        let jsonResult = removeFileIfExists(url: identifier.jsonURL(baseURL: directoryURL))
+        let attachmentResult = removeFileIfExists(url: identifier.attachmentURL(baseURL: directoryURL))
+        return jsonResult.flatMap { _ in attachmentResult }
     }
 
-    /// - Throws: `EntityRemovingError`
-    private func removeFileIfExists(url: URL) throws {
+    private func removeFileIfExists(url: URL) -> Result<Void, EntityRemovingError> {
         switch fileExistenceChecker.fileExistence(at: url) {
         case .none:
-            return
+            return .success(())
 
         case .directory:
-            throw EntityRemovingError.fileIsDirectory(url)
+            return .failure(.fileIsDirectory(url))
 
         case .file:
             do {
                 try fileRemover.removeItem(at: url)
+                return .success(())
             } catch {
-                throw EntityRemovingError.removalFailed(error)
+                return .failure(.removalFailed(error))
             }
         }
     }
+
+
+    // MARK: - Throwing variants
+
+    /// - Throws: `EntityRemovingError`
+    public func removeEntity(identifier: Identifier<E>) throws {
+        try removeFileIfExists(url: identifier.jsonURL(baseURL: directoryURL)).get()
+        try removeFileIfExists(url: identifier.attachmentURL(baseURL: directoryURL)).get()
+    }
+
 }
