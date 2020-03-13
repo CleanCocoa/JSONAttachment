@@ -94,7 +94,8 @@ extension Icon: RestorableAttachment {
     }
 
     private func iconRepresentations(size: NSSize) -> [NSImageRep] {
-        let representations = self.image.representations.filter { $0.size == size }
+        let representationsByDPI = Dictionary(grouping: self.image.representations, by: { $0.dpiFactor })
+        let representations = representationsByDPI.compactMap { $0.value.first }
 
         if !representations.isEmpty {
             return representations
