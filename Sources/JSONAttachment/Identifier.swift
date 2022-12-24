@@ -1,5 +1,7 @@
 //  Copyright © 2020 Christian Tietze. All rights reserved. Distributed under the MIT License.
 
+import Foundation
+
 public struct Identifier<E: Entity>: Equatable, Hashable {
     public let rawValue: String
 

@@ -55,15 +55,15 @@
 		50B67CC223FFD1A9004910B0 /* JSONAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONAttachment.h; sourceTree = "<group>"; };
 		50B67CC323FFD1A9004910B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B67CC823FFD1A9004910B0 /* JSONAttachmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSONAttachmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		50B67CCD23FFD1A9004910B0 /* JSONAttachmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONAttachmentTests.swift; sourceTree = "<group>"; };
+		50B67CCD23FFD1A9004910B0 /* JSONAttachmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONAttachmentTests.swift; path = ../Tests/JSONAttachmentTests/JSONAttachmentTests.swift; sourceTree = "<group>"; };
 		50B67CCF23FFD1A9004910B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		50B67CD923FFD8CF004910B0 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		50B67CDB23FFD9D3004910B0 /* EntityWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityWriter.swift; sourceTree = "<group>"; };
-		50B67CDD23FFDB6E004910B0 /* EntityReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityReader.swift; sourceTree = "<group>"; };
-		50B67CDF23FFDD4B004910B0 /* FileExistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExistence.swift; sourceTree = "<group>"; };
-		50B67CE123FFDD7C004910B0 /* FileManager+FileExistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+FileExistence.swift"; sourceTree = "<group>"; };
-		50B67CE323FFDE94004910B0 /* JSONLister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLister.swift; sourceTree = "<group>"; };
-		50B67CE523FFDEBC004910B0 /* FileManager+JSONLister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+JSONLister.swift"; sourceTree = "<group>"; };
+		50B67CD923FFD8CF004910B0 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Entity.swift; path = ../Sources/JSONAttachment/Entity.swift; sourceTree = "<group>"; };
+		50B67CDB23FFD9D3004910B0 /* EntityWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntityWriter.swift; path = ../Sources/JSONAttachment/EntityWriter.swift; sourceTree = "<group>"; };
+		50B67CDD23FFDB6E004910B0 /* EntityReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntityReader.swift; path = ../Sources/JSONAttachment/EntityReader.swift; sourceTree = "<group>"; };
+		50B67CDF23FFDD4B004910B0 /* FileExistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileExistence.swift; path = ../Sources/JSONAttachment/FileExistence.swift; sourceTree = "<group>"; };
+		50B67CE123FFDD7C004910B0 /* FileManager+FileExistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FileManager+FileExistence.swift"; path = "../Sources/JSONAttachment/FileManager+FileExistence.swift"; sourceTree = "<group>"; };
+		50B67CE323FFDE94004910B0 /* JSONLister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = JSONLister.swift; path = ../Sources/JSONAttachment/JSONLister.swift; sourceTree = "<group>"; };
+		50B67CE523FFDEBC004910B0 /* FileManager+JSONLister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FileManager+JSONLister.swift"; path = "../Sources/JSONAttachment/FileManager+JSONLister.swift"; sourceTree = "<group>"; };
 		50B67CEB24003570004910B0 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50B67CED24003570004910B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50B67CEF24003570004910B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,11 +73,11 @@
 		50B67CF724003572004910B0 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		50B67CFB240043E4004910B0 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		50B67CFD24011074004910B0 /* URLAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAccess.swift; sourceTree = "<group>"; };
-		50B67D0124013418004910B0 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
-		50B67D0324013C18004910B0 /* EntityRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityRemover.swift; sourceTree = "<group>"; };
-		50B67D0524013D67004910B0 /* FileRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRemover.swift; sourceTree = "<group>"; };
-		50B67D0724013D80004910B0 /* FileManager+FileRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+FileRemover.swift"; sourceTree = "<group>"; };
-		50B67D0924013EFD004910B0 /* EntityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityRepository.swift; sourceTree = "<group>"; };
+		50B67D0124013418004910B0 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Identifier.swift; path = ../Sources/JSONAttachment/Identifier.swift; sourceTree = "<group>"; };
+		50B67D0324013C18004910B0 /* EntityRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntityRemover.swift; path = ../Sources/JSONAttachment/EntityRemover.swift; sourceTree = "<group>"; };
+		50B67D0524013D67004910B0 /* FileRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileRemover.swift; path = ../Sources/JSONAttachment/FileRemover.swift; sourceTree = "<group>"; };
+		50B67D0724013D80004910B0 /* FileManager+FileRemover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FileManager+FileRemover.swift"; path = "../Sources/JSONAttachment/FileManager+FileRemover.swift"; sourceTree = "<group>"; };
+		50B67D0924013EFD004910B0 /* EntityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntityRepository.swift; path = ../Sources/JSONAttachment/EntityRepository.swift; sourceTree = "<group>"; };
 		50B67D0D24019B04004910B0 /* ApplicationCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

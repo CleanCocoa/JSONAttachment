@@ -1,5 +1,7 @@
 //  Copyright © 2020 Christian Tietze. All rights reserved. Distributed under the MIT License.
 
+import Foundation
+
 public enum EntityReadingError: Error {
     case directoryListingFailed(reason: Error)
     case fileDoesNotExist(URL)
